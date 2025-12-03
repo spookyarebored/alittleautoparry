@@ -13,7 +13,7 @@ end)
 local function S6_func()
 	local S10_ = Instance.new("UIStroke")
 	local S11_ = Instance.new("UICorner")
-
+	
 	local S12_ = Instance.new("ScreenGui")
 	local S13_ = Instance.new("ImageButton")
 

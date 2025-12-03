@@ -43,18 +43,22 @@ function Library:save_flags()
     if not Library.exist() then return end
     local success, result = pcall(function()
         local flags = HttpService:JSONEncode(Library.Flags)
-        writefile(`Argon Hub X/{game.GameId}.lua`, flags)
+        -- use normal quotes + concatenation
+        writefile("Argon Hub X/" .. game.GameId .. ".lua", flags)
     end)
 end
 
 function Library:load_flags()
     local success, result = pcall(function()
-        if not isfile(`Argon Hub X/{game.GameId}.lua`) then
+        -- same fix here
+        local filePath = "Argon Hub X/" .. game.GameId .. ".lua"
+
+        if not isfile(filePath) then
             Library.save_flags()
             return
         end
 
-        local flags = readfile(`Argon Hub X/{game.GameId}.lua`)
+        local flags = readfile(filePath)
         if not flags then
             Library.save_flags()
             return

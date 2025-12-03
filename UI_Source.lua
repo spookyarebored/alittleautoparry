@@ -39,11 +39,12 @@ function Library:exist()
     if not Library.core.Parent then return end
     return true
 end
+
 function Library:save_flags()
     if not Library.exist() then return end
     pcall(function()
         local flags = HttpService:JSONEncode(Library.Flags)
-        -- chaîne valide : "Argon Hub X/" .. game.GameId .. ".lua"
+        -- Chaîne valide :  "Argon Hub X/" .. game.GameId .. ".lua"
         writefile("Argon Hub X/" .. game.GameId .. ".lua", flags)
     end)
 end

@@ -14,8 +14,8 @@ local Library = {
     drag_position = nil;
     start_position = nil;
 }
-if not isfolder("Argon Hub X") then
-    makefolder("Argon Hub X")
+if not isfolder("beta-private") then
+    makefolder("beta-private")
 end
 function Library:disconnect()
 	for _, value in Library.connections do
@@ -28,7 +28,7 @@ function Library:disconnect()
 end
 function Library:clear()
 	for _, object in CoreGui:GetChildren() do
-		if object.Name ~= "Argon Hub X" then
+		if object.Name ~= "beta-private" then
 			continue
 		end
 		object:Destroy()
@@ -39,26 +39,22 @@ function Library:exist()
     if not Library.core.Parent then return end
     return true
 end
-
 function Library:save_flags()
     if not Library.exist() then return end
-    pcall(function()
+    local success, result = pcall(function()
         local flags = HttpService:JSONEncode(Library.Flags)
-        -- Chaîne valide :  "Argon Hub X/" .. game.GameId .. ".lua"
-        writefile("Argon Hub X/" .. game.GameId .. ".lua", flags)
+        writefile(`beta-private/{game.GameId}.lua`, flags)
     end)
 end
 
 function Library:load_flags()
-    pcall(function()
-        local filePath = "Argon Hub X/" .. game.GameId .. ".lua"
-
-        if not isfile(filePath) then
+    local success, result = pcall(function()
+        if not isfile(`beta-private/{game.GameId}.lua`) then
             Library.save_flags()
             return
         end
 
-        local flags = readfile(filePath)
+        local flags = readfile(`beta-private/{game.GameId}.lua`)
         if not flags then
             Library.save_flags()
             return
@@ -126,7 +122,7 @@ function Library:visible()
 end
 function Library.__init()
 	local container = Instance.new("ScreenGui")
-	container.Name = "Argon Hub X"
+	container.Name = "beta-private"
     container.Parent = CoreGui
     Library.core = container
 	local Shadow = Instance.new("ImageLabel")
@@ -190,7 +186,7 @@ function Library.__init()
 	TextLabel.Position = UDim2.new(0.0938254446, 0, 0.496794879, 0)
 	TextLabel.Size = UDim2.new(0, 75, 0, 16)
 	TextLabel.FontFace = Font.new("rbxasset://fonts/families/Montserrat.json", Enum.FontWeight.SemiBold)
-	TextLabel.Text = 'Argon Hub X'
+	TextLabel.Text = 'beta-private'
 	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 	TextLabel.TextScaled = true
 	TextLabel.TextSize = 14.000
